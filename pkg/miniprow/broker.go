@@ -996,6 +996,10 @@ func (bi *defaultBrokerImplementation) GetUserPerms(
 		return userPerms, errors.Wrap(err, "getting repository owners")
 	}
 
+	if owners == nil {
+		return nil, fmt.Errorf("repository has no owners set")
+	}
+
 	for _, user := range owners.Approvers {
 		if userName == string(user) {
 			logrus.Infof(
