@@ -16,9 +16,9 @@ jobs:
   setup:
     name: Build Container Image
     runs-on: ubuntu-latest
-    permissions:
-      packages: read/write
-      contents: read
+    #permissions:
+      #packages: read/write
+      #contents: read
     env:
       KO_DOCKER_REPO: ghcr.io/${{ github.actor }}/miniprow
       TAG: ""
