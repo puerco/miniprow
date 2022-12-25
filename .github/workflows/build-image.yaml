@@ -54,7 +54,7 @@ jobs:
       - name: Build Canary
         if: startsWith(github.ref, 'refs/tags/v')
         run: |
-          ko build --bare ./actions/broker/ -t latest -t ${{ GIT_VERSION }} --platform=linux/amd64
+          ko build --bare ./actions/broker/ -t latest -t ${{ env.GIT_VERSION }} --platform=linux/amd64
         
       - name: Build Release
         if: ! startsWith(github.ref, 'refs/tags/v')
