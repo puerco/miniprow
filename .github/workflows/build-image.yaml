@@ -52,6 +52,14 @@ jobs:
           go-version: 1.19
           check-latest: true
 
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+
       - name: Build Canary
         if: ${{ env.TAG != '' }}
         run: |
