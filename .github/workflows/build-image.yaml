@@ -40,8 +40,10 @@ jobs:
         if: startsWith(env.GITHUB_REF, 'refs/tags/v')
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> "$GITHUB_ENV"
 
-      - name: Get current tag from input
-        run: echo "GIT_VERSION=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
+      - name: Get Short Commit SHA
+        run: |
+          echo ${GITHUB_REF}
+          echo "GIT_VERSION=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
 
       - name: Print info
         run: echo "${{ env.GIT_VERSION }} / Git Commit ${{ env.GIT_COMMIT }} - ${{ env.DOMAIN }}"
