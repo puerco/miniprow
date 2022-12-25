@@ -58,10 +58,10 @@ jobs:
           check-latest: true
 
       - name: Build Canary
-        if: env.TAG == ""
+        if: ${{ env.TAG == "" }}
         run: |
           ko build --bare ./actions/broker/ -t latest -t ${{ env.GIT_VERSION }} --platform=linux/amd64
         
       - name: Build Release
-        if: env.TAG != ""
+        if: ${{ env.TAG != "" }}
         run: ko build --bare ./actions/broker/ -t canary --platform=linux/amd64
