@@ -41,7 +41,7 @@ jobs:
         run: echo "TAG=${GITHUB_REF#refs/*/}" >> "$GITHUB_ENV"
 
       - name: Get current tag from input
-        run: echo "GIT_VERSION=$(git rev-parse --short "${{ env.GITHUB_SHA }}")" >> "$GITHUB_ENV"
+        run: echo "GIT_VERSION=$(git rev-parse --short ${{ env.GITHUB_SHA }})" >> "$GITHUB_ENV"
 
       - name: Print info
         run: echo "TAG=${{ env.GIT_VERSION }} / Git Commit ${{ env.GIT_COMMIT }} - ${{ env.DOMAIN }}"
