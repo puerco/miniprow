@@ -44,7 +44,7 @@ jobs:
         run: echo "GIT_VERSION=$(git rev-parse --short HEAD)" >> "$GITHUB_ENV"
 
       - name: Print info
-        run: echo "TAG=${{ env.GIT_VERSION }} / Git Commit ${{ env.GIT_COMMIT }} - ${{ env.DOMAIN }}"
+        run: echo "${{ env.GIT_VERSION }} / Git Commit ${{ env.GIT_COMMIT }} - ${{ env.DOMAIN }}"
 
       - name: Set up Go
         uses: actions/setup-go@v3
@@ -60,11 +60,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
 
-      - name: Build Canary
+      - name: Build Release
         if: ${{ env.TAG != '' }}
         run: |
-          ko build --bare ./actions/broker/ -t latest -t ${{ env.GIT_VERSION }} --platform=linux/amd64
+          ko build --bare ./actions/broker/ -t latest -t ${{ env.TAG }} -t ${{ env.GIT_VERSION }} --platform=linux/amd64
         
-      - name: Build Release
+      - name: Build Canary
         if: ${{ env.TAG == '' }}
         run: ko build --bare ./actions/broker/ -t canary -t ${{ env.GIT_VERSION }} --platform=linux/amd64
